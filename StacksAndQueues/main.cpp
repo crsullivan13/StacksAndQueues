@@ -3,6 +3,8 @@
 #include "Stack.h"
 #include <string>
 #include <unordered_map>
+#include "CallCounter.h"
+#include "MovingAverage.h"
 //[4,1,2] [1,3,4,2]
 
 int* greaterElements(int* arr1, int* arr2) {
@@ -20,8 +22,7 @@ int* greaterElements(int* arr1, int* arr2) {
 		}
 		myStack.push(arr2[i]);
 	}
-#include "CallCounter.h"
-#include "MovingAverage.h"
+
 
 	while(!myStack.isEmpty()) {
 		myMap[myStack.peek()] = -1;
