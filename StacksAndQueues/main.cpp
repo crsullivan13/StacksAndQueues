@@ -2,6 +2,8 @@
 #include "Node.h"
 #include "Stack.h"
 #include <string>
+#include "CallCounter.h"
+#include "MovingAverage.h"
 
 bool validateChars(std::string str) {
 
@@ -104,6 +106,8 @@ std::string removeAdjacentDups(std::string str) {
 
 }
 
+//Ron Carter
+
 
 
 int main()
@@ -118,6 +122,20 @@ int main()
 	std::cout << compareKeyStrokes(str1, str2) << " Stack\n";
 
 	std::cout << validateChars(myStr) << " Stack\n";
+
+	CallCounter counter;
+	std::cout << counter.ping(1) << "\n";
+	std::cout << counter.ping(300) << "\n";
+	std::cout << counter.ping(3000) << "\n";
+	std::cout << counter.ping(3002) << "\n";
+	std::cout << counter.ping(7000) << "\n";
+	
+	MovingAverage avg(3);
+	std::cout << "\n" << avg.next(3) << "\n";
+	std::cout <<  avg.next(5) << "\n";
+	std::cout << avg.next(7) << "\n";
+	std::cout << avg.next(6) << "\n";
+
 	return 0;
 
 
