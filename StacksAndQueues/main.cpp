@@ -2,8 +2,38 @@
 #include "Node.h"
 #include "Stack.h"
 #include <string>
+#include <unordered_map>
+//[4,1,2] [1,3,4,2]
+
+int* greaterElements(int* arr1, int* arr2) {
+	int length1 = 3;
+	int length2 = 4;
+	int temp;
+	int* results = new int[3];
+	Stack<int> myStack;
+	std::unordered_map<int,int> myMap;
+
+	for(int i = 0; i < length2; i++) {
+		while(!myStack.isEmpty() && myStack.peek() < arr2[i]) {
+			myMap[myStack.peek()] = arr2[i];
+			myStack.pop();
+		}
+		myStack.push(arr2[i]);
+	}
 #include "CallCounter.h"
 #include "MovingAverage.h"
+
+	while(!myStack.isEmpty()) {
+		myMap[myStack.peek()] = -1;
+		myStack.pop();
+	}
+
+	for(int i = 0; i < length1; i++) {
+		results[i] = myMap[arr1[i]];
+	}
+
+	return results;
+}
 
 bool validateChars(std::string str) {
 
@@ -116,12 +146,25 @@ int main()
 	std::string str1 = "cof#dim#ng";
 	std::string str2 = "code";
 	std::string str3 = "abccbefggfe";
+	//[4,1,2] [1,3,4,2]
+	int* arr1 = new int[3];
+	arr1[0] = 4; arr1[1] = 1, arr1[2] = 2;
+	int* arr2 = new int[4];
+	arr2[0] = 1; arr2[1] = 3; arr2[2] = 4; arr2[3] = 2;
+	int* results;
 
 	std::cout << removeAdjacentDups(str3) << " Stack\n";
 
 	std::cout << compareKeyStrokes(str1, str2) << " Stack\n";
 
 	std::cout << validateChars(myStr) << " Stack\n";
+
+	results = greaterElements(arr1, arr2);
+	for(int i = 0; i < 3; i++) {
+		std::cout << results[i] << ", ";
+	}
+	std::cout << "Stack\n";
+
 
 	CallCounter counter;
 	std::cout << counter.ping(1) << "\n";
